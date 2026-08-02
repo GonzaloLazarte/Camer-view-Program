@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Actions.cs" />
     <Compile Include="CameraManager.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

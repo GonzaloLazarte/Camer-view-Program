@@ -25,6 +25,7 @@ namespace Camera_View {
                     break;
                 case "Añadir Camaras":
                     Console.WriteLine("Añadir Camaras");
+                    _cameras.NewCamera(cam_file);
                     break;
                 case "Quitar Camaras":
                     Console.WriteLine("Quitar Camaras");

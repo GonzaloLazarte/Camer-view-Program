@@ -19,12 +19,9 @@ namespace Camera_View {
                 Console.WriteLine("NO EXISTEN CAMARAS AÑADIDAS");
             }
             foreach (string line in lines) {
-                string[] datos = line.Split('|');
-                Console.WriteLine("==================================");
-                Console.WriteLine("ID: " + datos[0]);
-                Console.WriteLine("Usuario: " + datos[1]);
-                Console.WriteLine("Hora Inicio: " + datos[2]);
-                Console.WriteLine("Precio/Hora: $" + datos[3]);
+                string[] datos = line.Split('/');
+                Console.WriteLine("__________________________________");
+                Console.WriteLine(" " + datos[0] + " - " + datos[1]);
             }
             MenuOption(lines, _cam_file);
         }
@@ -34,7 +31,7 @@ namespace Camera_View {
             foreach (string linea in lineas) {
                 if (string.IsNullOrWhiteSpace(linea))
                     continue;
-                string[] datos = linea.Split('|');
+                string[] datos = linea.Split('/');
                 option.Add(datos[0]);
             }
             if (option.Count == 0) {
@@ -78,19 +75,34 @@ namespace Camera_View {
                 }
             }
         }
-        private void validateOption(string _option) {
-            switch(_option){
-                case "Ver Todas":
-                    // INSTRUCCIONES DE MOSTRAR TODAS LAS CAMARAS
+        public void validateOption(string option) {
+
+        }
+        public void NewCamera(string _cam_file) {
+            string[] option = { "Camaras Añadidas", "Añadir nueva Camara", "Salir" };
+            Menu menuOption = new Menu();
+            int selection = 0, comparation = menuOption.Menuview(option, selection);
+            string decOption = menuOption.decOption(option, comparation);
+            switch (decOption) {
+                case "Camaras Añadidas":
+                    MenuView(_cam_file);
+                    NewCamera(_cam_file);
                     break;
-                default:
-                    selectCamera();
+                case "Añadir nueva Camara":
+                    addCamera();
                     break;
+                case "Salir":
+                    return;
             }
         }
-        private void selectCamera() {
+        public void addCamera() {
+            Console.WriteLine("==========INGRESE LOS DATOS A AÑADIR DE LA CAMARA===========");
 
         }
 
+
+        private void validaciones() {
+
+        }
     }
 }
