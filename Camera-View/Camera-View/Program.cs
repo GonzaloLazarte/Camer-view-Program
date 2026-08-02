@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Camera_View {
     internal class Program {
         static Actions menuAction = new Actions();
+        static CameraManager cameras = new CameraManager();
         static void Main(string[] args) {
             
             string[] option = {"Ver Camaras", "Añadir Camaras", "Quitar Camaras", "Salir"};
@@ -44,7 +45,7 @@ namespace Camera_View {
                             return;
                         }
                         else {
-                            menuAction.seleccMenu(option[selection]);
+                            menuAction.seleccMenu(option[selection], cameras);
                         }
                         return;
                         
