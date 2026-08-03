@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Camera_View {
     internal class Menu {
 
-        public Menu() {
-           
+        public Menu() {  
         }
-
         public int Menuview( string[] option, int selection) {
             while (true) {
                 Console.Clear();
@@ -62,8 +61,24 @@ namespace Camera_View {
             }
             return decOption;
         }
-
-
-
+        public string[] decListOption(string _cam_file) {
+            List<string> option = new List<string>();
+            string[] lineas = File.ReadAllLines(_cam_file);
+            foreach (string linea in lineas) {
+                if (string.IsNullOrWhiteSpace(linea))
+                    continue;
+                string[] datos = linea.Split('/');
+                option.Add(datos[0]);
+            }
+            if (option.Count == 0) {
+                option.Add("Volver");
+            }
+            else {
+                option.Add("Ver Todas");
+                option.Add("Volver");
+            }
+            string[] optionConverted = option.ToArray();
+            return optionConverted;
+        }
     }
 }

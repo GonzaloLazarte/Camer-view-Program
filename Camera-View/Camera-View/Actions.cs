@@ -29,6 +29,7 @@ namespace Camera_View {
                     break;
                 case "Quitar Camaras":
                     Console.WriteLine("Quitar Camaras");
+                    _cameras.removeCamera(cam_file);
                     break;
             }
         }

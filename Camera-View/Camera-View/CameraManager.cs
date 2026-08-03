@@ -26,58 +26,29 @@ namespace Camera_View {
             MenuOption(lines, _cam_file);
         }
         private void MenuOption(string[] _lines, string _cam_file) {
-            List<string> option = new List<string>();
-            string[] lineas = File.ReadAllLines(_cam_file);
-            foreach (string linea in lineas) {
-                if (string.IsNullOrWhiteSpace(linea))
-                    continue;
-                string[] datos = linea.Split('/');
-                option.Add(datos[0]);
+            Menu menuOption = new Menu();
+            string[] option = menuOption.decListOption(_cam_file);
+            int selection = 0, comparation = menuOption.Menuview(option, selection);
+            string decOption = menuOption.decOption(option, comparation);
+            switch (decOption) {
+                case "Todas":
+                    MenuView(_cam_file);
+                    NewCamera(_cam_file);
+                    break;
+                case "Salir":
+                    return;
+                default:
+                    vercam(decOption);
+                    return;
             }
-            if (option.Count == 0) {
-                option.Add("Volver");
-            }
-            else {
-                option.Add("Ver Todas");
-                option.Add("Volver");
-            }
-            int selection = 0;
-            while (true) {
-                Console.Clear();
-                Console.WriteLine("=== MENU ===\n");
-
-                for (int i = 0; i < option.Count; i++) {
-                    if (i == selection)
-                        Console.WriteLine($"<< {option[i]} >>");
-                    else
-                        Console.WriteLine($"   {option[i]}");
-                }
-                Console.WriteLine();
-                Console.WriteLine("===========");
-                ConsoleKey tecla = Console.ReadKey(true).Key;
-                switch (tecla) {
-                    case ConsoleKey.UpArrow:
-                        if (selection > 0)
-                            selection--;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        if (selection < option.Count - 1)
-                            selection++;
-                        break;
-                    case ConsoleKey.Enter:
-
-                        if (option[selection] == "Volver")
-                            return;
-                        Console.Clear();
-                        Console.WriteLine($"Elegiste: {option[selection]}");
-                        validateOption(option[selection]);
-                        return;
-                }
-            }
+        }
+        private void vercam(string option) {
+            //este metodo recorre el doc. valida el nombre de la cam y si e sigual a alguno que existe, ejecuta otro metodo de ver camaras 
         }
         public void validateOption(string option) {
 
         }
+        
         public void NewCamera(string _cam_file) {
             string[] option = { "Camaras Añadidas", "Añadir nueva Camara", "Salir" };
             Menu menuOption = new Menu();
@@ -89,17 +60,72 @@ namespace Camera_View {
                     NewCamera(_cam_file);
                     break;
                 case "Añadir nueva Camara":
-                    addCamera();
+                    addCamera(_cam_file);
+                    NewCamera(_cam_file);
                     break;
                 case "Salir":
                     return;
             }
         }
-        public void addCamera() {
+        public void addCamera(string _cam_file) {
+            string name,user,password, ip;
             Console.WriteLine("==========INGRESE LOS DATOS A AÑADIR DE LA CAMARA===========");
+            Console.WriteLine("");
+            Console.WriteLine("Ingrese el nombre de la camara: ");
+            name = Console.ReadLine();
+            Console.WriteLine("Ingrese la dirección IP de la camara: ");
+            ip = Console.ReadLine();    
+            Console.WriteLine("Ingrese el Nombre de usuario de la camara: ");
+            user = Console.ReadLine();
+            Console.WriteLine("Ingrese la Contraseña de la camara: ");
+            password = Console.ReadLine();
 
+            Camera NewCamera = new Camera(name, ip, user, password);
+
+            StreamWriter sw = new StreamWriter(_cam_file, true);
+
+            sw.WriteLine(NewCamera.cam_name + "/" + NewCamera.cam_ip + "/" + NewCamera.cam_user + "/" + NewCamera.cam_password); //escribe en el archivo los datos ingresados
+            sw.Close();
+
+            Console.WriteLine();
+            Console.WriteLine("Cámara añadida correctamente.");
+            Console.ReadKey();
         }
-
+        
+        public void removeCamera(string _cam_file) {
+            string[] option = { "Quitar camara", "Quitar todas", "Salir" };
+            Menu menuOption = new Menu();
+            int selection = 0, comparation = menuOption.Menuview(option, selection);
+            string decOption = menuOption.decOption(option, comparation);
+            switch (decOption) {
+                case "Quitar camara":
+                    quitCamera(_cam_file);
+                    break;
+                case "Quitar todas":
+                    QuitAllCameras(_cam_file);
+                    break;
+                case "Salir":
+                    return;
+            }
+        }
+        private void quitCamera(string _cam_file) {
+            Menu menuOption = new Menu();
+            string[] option = menuOption.decListOption(_cam_file);
+            int selection = 0, comparation = menuOption.Menuview(option, selection);
+            string decOption = menuOption.decOption(option, comparation);
+            string[] lineas = File.ReadAllLines(_cam_file);
+            List<string> nuevasLineas = new List<string>();
+            foreach (string linea in lineas) {
+                string[] datos = linea.Split('/');
+                if (datos[0] != decOption) {
+                    nuevasLineas.Add(linea);
+                }
+            }
+            File.WriteAllLines(_cam_file, nuevasLineas);
+        }
+        public void QuitAllCameras(string _cam_file) {
+            File.WriteAllText(_cam_file, string.Empty);
+        }
 
         private void validaciones() {
 
