@@ -17,7 +17,8 @@ namespace Camera_View {
                 File.Create(cam_file).Close();
             }
         }
-        public void seleccMenu(string actionSelected, CameraManager _cameras) {
+        public void seleccMenu(string actionSelected, CameraManager _cameras) {     //metodo que compara la opcion seleccionada 
+
             switch (actionSelected) {
                 case "Ver Camaras":
                     Console.WriteLine("Ver Camaras");

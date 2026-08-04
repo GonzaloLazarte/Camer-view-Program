@@ -12,7 +12,7 @@ namespace Camera_View {
             
             string[] option = {"Ver Camaras", "Añadir Camaras", "Quitar Camaras", "Salir"};
             int selection = 0;
-            while (true) {
+            while (true) {                  //bucle encargado de mostrar el menu y recibir la seleccion del usuario
                 Console.Clear();
                 Console.WriteLine("=== MENU ===\n");
                 for (int i = 0; i < option.Length; i++) {
@@ -37,7 +37,7 @@ namespace Camera_View {
                             selection++;
                         }
                         break;
-                    case ConsoleKey.Enter:
+                    case ConsoleKey.Enter:              //caso de selecicon donde llamamos al metodo correspondiente de la clase Actions para ejecutar la accion seleccionada
                         Console.Clear();
                         Console.WriteLine($"Elegiste: {option[selection]}");
 

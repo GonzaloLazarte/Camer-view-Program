@@ -11,7 +11,7 @@ namespace Camera_View {
         public CameraManager() {
 
         }
-        public void MenuView(string _cam_file) {
+        public void MenuView(string _cam_file) { // metodo encargado de mostrar las camaras añadidas en el archivo de texto
             Console.Clear();
             string[] lines = File.ReadAllLines(_cam_file);
 
@@ -38,15 +38,20 @@ namespace Camera_View {
                 case "Salir":
                     return;
                 default:
-                    vercam(decOption);
+                    WatchCam(decOption, _cam_file);
                     return;
             }
         }
-        private void vercam(string option) {
-            //este metodo recorre el doc. valida el nombre de la cam y si e sigual a alguno que existe, ejecuta otro metodo de ver camaras 
-        }
-        public void validateOption(string option) {
+        private void WatchCam(string option, string _cam_file) {
 
+            ConstructCommand  newLine = new ConstructCommand();
+            string[] lineas = File.ReadAllLines(_cam_file);
+            foreach (string linea in lineas) {
+                string[] datos = linea.Split('/');
+                if (datos[0] == option) {
+                    ShowActiveCam(datos[1], datos[2], datos[3]);
+                }
+            }
         }
         
         public void NewCamera(string _cam_file) {
