@@ -43,13 +43,13 @@ namespace Camera_View {
             }
         }
         private void WatchCam(string option, string _cam_file) {
-
             ConstructCommand  newLine = new ConstructCommand();
             string[] lineas = File.ReadAllLines(_cam_file);
             foreach (string linea in lineas) {
                 string[] datos = linea.Split('/');
                 if (datos[0] == option) {
-                    ShowActiveCam(datos[1], datos[2], datos[3]);
+                    string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
+                    newLine.Ejecutar(protocol);
                 }
             }
         }
