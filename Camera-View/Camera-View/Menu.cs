@@ -10,10 +10,13 @@ namespace Camera_View {
 
         public Menu() {  
         }
-        public int Menuview( string[] option, int selection) {
+        
+        
+        //muestra el menu y devuelve un valor string que seria la seleccion del usuario 
+        public int Menuview( string[] option, int selection, string title) {
             while (true) {
                 Console.Clear();
-                Console.WriteLine("=== MENU ===\n");
+                Console.WriteLine($"=== {title} ===\n");
                 for (int i = 0; i < option.Length; i++) {
                     if (i == selection) {
                         Console.WriteLine($"<< {option[i]} >>");
@@ -51,6 +54,8 @@ namespace Camera_View {
                 }
             }
         }
+
+        //metodo que recibe una opcion y la decodifica en base a su posicion del arreglo, devuelve un string con la opcion seleccionada
         public string decOption(string[] option, int comparation) {
             string decOption = string.Empty;
             for (int i = 0; i <= option.Length; i++) {
@@ -61,6 +66,8 @@ namespace Camera_View {
             }
             return decOption;
         }
+        
+        //metodo que recibe un archivo de texto cuenta sus lineas y devuelve un arreglo de string con las opciones de camaras del archivo 
         public string[] decListOption(string _cam_file) {
             List<string> option = new List<string>();
             string[] lineas = File.ReadAllLines(_cam_file);
@@ -80,5 +87,7 @@ namespace Camera_View {
             string[] optionConverted = option.ToArray();
             return optionConverted;
         }
+    
+    
     }
 }

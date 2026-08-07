@@ -8,11 +8,17 @@ namespace Camera_View {
     internal class Program {
         static Actions menuAction = new Actions();
         static CameraManager cameras = new CameraManager();
+        static Menu menu = new Menu();
         static void Main(string[] args) {
             
             string[] option = {"Ver Camaras", "Añadir Camaras", "Quitar Camaras", "Salir"};
-            int selection = 0;
+            int selection = 0, comparation = 0;
+            string title = "Menu principal", selected = string.Empty;
             while (true) {                  //bucle encargado de mostrar el menu y recibir la seleccion del usuario
+                comparation = menu.Menuview(option, selection, title);
+                selected = menu.decOption(option, comparation);
+                menuAction.seleccMenu(selected, cameras);
+                /*
                 Console.Clear();
                 Console.WriteLine("=== MENU ===\n");
                 for (int i = 0; i < option.Length; i++) {
@@ -50,6 +56,7 @@ namespace Camera_View {
                         return;
                         
                 }
+                */
             }
 
             //aqui llamamos al metodo para la salida del programa

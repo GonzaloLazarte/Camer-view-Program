@@ -11,6 +11,8 @@ namespace Camera_View {
         public CameraManager() {
 
         }
+
+        //metodo encargado de mostrar las camaras añadidas en el archivo de texto
         public void MenuView(string _cam_file) { // metodo encargado de mostrar las camaras añadidas en el archivo de texto
             Console.Clear();
             string[] lines = File.ReadAllLines(_cam_file);
@@ -25,11 +27,14 @@ namespace Camera_View {
             }
             MenuOption(lines, _cam_file);
         }
+
+        // metodo encargado la funcionalidad de seleccionar opciones del menu de camaras añadidas y la opcion de volver 
         private void MenuOption(string[] _lines, string _cam_file) {
             Menu menuOption = new Menu();
+            string decOption = string.Empty, title = "Opciones de Cámara";
             string[] option = menuOption.decListOption(_cam_file);
-            int selection = 0, comparation = menuOption.Menuview(option, selection);
-            string decOption = menuOption.decOption(option, comparation);
+            int selection = 0, comparation = menuOption.Menuview(option, selection, title);
+            decOption = menuOption.decOption(option, comparation);
             switch (decOption) {
                 case "Todas":
                     MenuView(_cam_file);
@@ -42,6 +47,8 @@ namespace Camera_View {
                     return;
             }
         }
+
+        //metodo encargado de ejecutar el comando para ver la camara seleccionada
         private void WatchCam(string option, string _cam_file) {
             ConstructCommand  newLine = new ConstructCommand();
             string[] lineas = File.ReadAllLines(_cam_file);
@@ -53,12 +60,14 @@ namespace Camera_View {
                 }
             }
         }
-        
+
+        //metodos encargado de añadir nuevas camaras al archivo de texto
         public void NewCamera(string _cam_file) {
+            string title = "Opciones de Añadir Camara", decOption = string.Empty;
             string[] option = { "Camaras Añadidas", "Añadir nueva Camara", "Salir" };
             Menu menuOption = new Menu();
-            int selection = 0, comparation = menuOption.Menuview(option, selection);
-            string decOption = menuOption.decOption(option, comparation);
+            int selection = 0, comparation = menuOption.Menuview(option, selection, title);
+            decOption = menuOption.decOption(option, comparation);
             switch (decOption) {
                 case "Camaras Añadidas":
                     MenuView(_cam_file);
@@ -96,15 +105,17 @@ namespace Camera_View {
             Console.WriteLine("Cámara añadida correctamente.");
             Console.ReadKey();
         }
-        
+
+        //metodos encargado de quitar camaras del archivo de texto
         public void removeCamera(string _cam_file) {
+            string title = "Opciones de Quitar Camara", decOption = string.Empty;
             string[] option = { "Quitar camara", "Quitar todas", "Salir" };
             Menu menuOption = new Menu();
-            int selection = 0, comparation = menuOption.Menuview(option, selection);
-            string decOption = menuOption.decOption(option, comparation);
+            int selection = 0, comparation = menuOption.Menuview(option, selection, title);
+            decOption = menuOption.decOption(option, comparation);
             switch (decOption) {
                 case "Quitar camara":
-                    quitCamera(_cam_file);
+                    quitCamera(_cam_file, title);
                     break;
                 case "Quitar todas":
                     QuitAllCameras(_cam_file);
@@ -113,10 +124,10 @@ namespace Camera_View {
                     return;
             }
         }
-        private void quitCamera(string _cam_file) {
+        private void quitCamera(string _cam_file, string title) {
             Menu menuOption = new Menu();
             string[] option = menuOption.decListOption(_cam_file);
-            int selection = 0, comparation = menuOption.Menuview(option, selection);
+            int selection = 0, comparation = menuOption.Menuview(option, selection, title);
             string decOption = menuOption.decOption(option, comparation);
             string[] lineas = File.ReadAllLines(_cam_file);
             List<string> nuevasLineas = new List<string>();

@@ -15,11 +15,10 @@ namespace Camera_View {
         }
         public void Ejecutar(string argumentos) {
             ProcessStartInfo info = new ProcessStartInfo();
-
-
+            
             info.FileName = @"..\..\toolls\ffmpeg\ffplay.exe";
             info.Arguments = argumentos;
-
+            
             Process.Start(info);
         }
 

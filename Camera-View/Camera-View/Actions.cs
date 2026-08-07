@@ -18,7 +18,6 @@ namespace Camera_View {
             }
         }
         public void seleccMenu(string actionSelected, CameraManager _cameras) {     //metodo que compara la opcion seleccionada 
-
             switch (actionSelected) {
                 case "Ver Camaras":
                     Console.WriteLine("Ver Camaras");
@@ -32,6 +31,8 @@ namespace Camera_View {
                     Console.WriteLine("Quitar Camaras");
                     _cameras.removeCamera(cam_file);
                     break;
+                case "Salir":
+                    return;
             }
         }
 
