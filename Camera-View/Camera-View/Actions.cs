@@ -17,7 +17,8 @@ namespace Camera_View {
                 File.Create(cam_file).Close();
             }
         }
-        public void seleccMenu(string actionSelected, CameraManager _cameras) {     //metodo que compara la opcion seleccionada 
+        public string seleccMenu(string actionSelected, CameraManager _cameras) {     //metodo que compara la opcion seleccionada 
+            string salir = "Salir", again = "Continuar";
             switch (actionSelected) {
                 case "Ver Camaras":
                     Console.WriteLine("Ver Camaras");
@@ -32,8 +33,9 @@ namespace Camera_View {
                     _cameras.removeCamera(cam_file);
                     break;
                 case "Salir":
-                    return;
+                    return salir;
             }
+            return again;
         }
 
     }

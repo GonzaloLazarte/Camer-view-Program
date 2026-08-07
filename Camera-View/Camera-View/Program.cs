@@ -17,7 +17,10 @@ namespace Camera_View {
             while (true) {                  //bucle encargado de mostrar el menu y recibir la seleccion del usuario
                 comparation = menu.Menuview(option, selection, title);
                 selected = menu.decOption(option, comparation);
-                menuAction.seleccMenu(selected, cameras);
+                string result = menuAction.seleccMenu(selected, cameras);
+                if (result == "Salir") {
+                    return;
+                }
                 /*
                 Console.Clear();
                 Console.WriteLine("=== MENU ===\n");
