@@ -24,6 +24,10 @@ namespace Camera_View {
                     Console.WriteLine("Ver Camaras");
                     _cameras.MenuView(cam_file);
                     break;
+                case "Grabar Camaras":
+                    Console.WriteLine("Grabar Camaras");
+                    _cameras.RecordCams();
+                    break;
                 case "Añadir Camaras":
                     Console.WriteLine("Añadir Camaras");
                     _cameras.NewCamera(cam_file);

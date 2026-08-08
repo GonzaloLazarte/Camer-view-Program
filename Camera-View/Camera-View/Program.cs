@@ -11,7 +11,7 @@ namespace Camera_View {
         static Menu menu = new Menu();
         static void Main(string[] args) {
             
-            string[] option = {"Ver Camaras", "Añadir Camaras", "Quitar Camaras", "Salir"};
+            string[] option = {"Ver Camaras", "Grabar Camaras", "Añadir Camaras", "Quitar Camaras", "Salir"};
             int selection = 0, comparation = 0;
             string title = "Menu principal", selected = string.Empty;
             while (true) {                  //bucle encargado de mostrar el menu y recibir la seleccion del usuario

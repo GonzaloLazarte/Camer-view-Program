@@ -55,21 +55,29 @@ namespace Camera_View {
             foreach (string linea in lineas) {
                 string[] datos = linea.Split('/');
                 if (datos[0] == option) {
-                    string protocol = newLine.createCommand(datos [0], datos[1], datos[2], datos[3]);
+                    string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
+                    protocol= newLine.CreatePlayCommand(protocol, datos[0]);
                     newLine.Ejecutar(protocol);
                 }
             }
         }
-        // metodo encargado de ejecutar el comando para ver todas las camaras añadidas
         private void watchAllCams(string _cam_file) {
             ConstructCommand newLine = new ConstructCommand();
             string[] lineas = File.ReadAllLines(_cam_file);
             foreach (string linea in lineas) {
                 string[] datos = linea.Split('/');
-                string protocol = newLine.createCommand(datos[0], datos[1], datos[2], datos[3]);
+                string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
+                protocol = newLine.CreatePlayCommand(protocol, datos[0]);
                 newLine.Ejecutar(protocol);
             }
         }
+
+        //metodo encargado de grabar camaras seleccionadas
+        public void RecordCams() {
+
+        }
+
+
 
         //metodos encargado de añadir nuevas camaras al archivo de texto
         public void NewCamera(string _cam_file) {
@@ -91,7 +99,7 @@ namespace Camera_View {
                     return;
             }
         }
-        public void addCamera(string _cam_file) {
+        private void addCamera(string _cam_file) {
             string name,user,password, ip;
             Console.WriteLine("==========INGRESE LOS DATOS A AÑADIR DE LA CAMARA===========");
             Console.WriteLine("");
@@ -149,7 +157,7 @@ namespace Camera_View {
             }
             File.WriteAllLines(_cam_file, nuevasLineas);
         }
-        public void QuitAllCameras(string _cam_file) {
+        private void QuitAllCameras(string _cam_file) {
             File.WriteAllText(_cam_file, string.Empty);
         }
         
