@@ -81,7 +81,7 @@ namespace Camera_View {
                 option.Add("Volver");
             }
             else {
-                option.Add("Ver Todas");
+                option.Add("Todas");
                 option.Add("Volver");
             }
             string[] optionConverted = option.ToArray();

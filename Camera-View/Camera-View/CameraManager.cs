@@ -37,19 +37,18 @@ namespace Camera_View {
             decOption = menuOption.decOption(option, comparation);
             switch (decOption) {
                 case "Todas":
-                    MenuView(_cam_file);
-                    NewCamera(_cam_file);
+                    watchAllCams(_cam_file);
                     break;
                 case "Salir":
                     return;
                 default:
-                    WatchCam(decOption, _cam_file);
+                    watchCams(decOption, _cam_file);
                     return;
             }
         }
 
         //metodo encargado de ejecutar el comando para ver la camara seleccionada
-        private void WatchCam(string option, string _cam_file) {
+        private void watchCams(string option, string _cam_file) {
             ConstructCommand  newLine = new ConstructCommand();
             string[] lineas = File.ReadAllLines(_cam_file);
             foreach (string linea in lineas) {
@@ -58,6 +57,16 @@ namespace Camera_View {
                     string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
                     newLine.Ejecutar(protocol);
                 }
+            }
+        }
+        // metodo encargado de ejecutar el comando para ver todas las camaras añadidas
+        private void watchAllCams(string _cam_file) {
+            ConstructCommand newLine = new ConstructCommand();
+            string[] lineas = File.ReadAllLines(_cam_file);
+            foreach (string linea in lineas) {
+                string[] datos = linea.Split('/');
+                string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
+                newLine.Ejecutar(protocol);
             }
         }
 
@@ -142,9 +151,7 @@ namespace Camera_View {
         public void QuitAllCameras(string _cam_file) {
             File.WriteAllText(_cam_file, string.Empty);
         }
+        
 
-        private void validaciones() {
-
-        }
     }
 }
