@@ -25,6 +25,7 @@ namespace Camera_View {
                 Console.WriteLine("__________________________________");
                 Console.WriteLine(" " + datos[0] + " - " + datos[1]);
             }
+            Console.ReadKey();
             MenuOption(lines, _cam_file);
         }
 
@@ -54,7 +55,7 @@ namespace Camera_View {
             foreach (string linea in lineas) {
                 string[] datos = linea.Split('/');
                 if (datos[0] == option) {
-                    string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
+                    string protocol = newLine.createCommand(datos [0], datos[1], datos[2], datos[3]);
                     newLine.Ejecutar(protocol);
                 }
             }
@@ -65,7 +66,7 @@ namespace Camera_View {
             string[] lineas = File.ReadAllLines(_cam_file);
             foreach (string linea in lineas) {
                 string[] datos = linea.Split('/');
-                string protocol = newLine.createCommand(datos[1], datos[2], datos[3]);
+                string protocol = newLine.createCommand(datos[0], datos[1], datos[2], datos[3]);
                 newLine.Ejecutar(protocol);
             }
         }

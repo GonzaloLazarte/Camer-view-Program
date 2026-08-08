@@ -9,9 +9,9 @@ namespace Camera_View {
     internal class ConstructCommand {
         public ConstructCommand() { 
         }
-        public string createCommand(string ip, string user, string password) {
+        public string createCommand( string title, string ip, string user, string password) {
             string protocol = $"rtsp://{user}:{password}@{ip}:554/stream1"; //ernesto123:ernesto123@10.0.0.43:554/stream1
-            return protocol;
+            return $"-window_title \"{title}\" \"{protocol}\"" ;
         }
         public void Ejecutar(string argumentos) {
             ProcessStartInfo info = new ProcessStartInfo();
